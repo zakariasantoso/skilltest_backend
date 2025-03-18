@@ -44,7 +44,7 @@ const findAllStudents = async (payload) => {
 }
 
 const addOrUpdateStudent = async (payload) => {
-    const query = "SELECT * FROM student_add_update($1)";
+    const query = `INSERT INTO users (name, email, role_id, password, is_active, created_dt, updated_dt) VALUES ($1, $2, 3, $3, $4, $5, $6) RETURNING id`;
     const queryParams = [payload];
     const { rows } = await processDBRequest({ query, queryParams });
     return rows[0];
